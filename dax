@@ -1,0 +1,86 @@
+#include <iostream>
+#include <string>
+#include<fstream>
+using namespace std;
+
+long long itc_len(string str){
+    long long k;
+    for(long long i=0; str[i]!='\0'; i++){
+    k = i;
+    }
+    return k+1;
+}   //2
+
+string itc_reverse_str(string str){
+    string S1="";
+    for (int i=0; str[i]!='\0'; i++){
+         S1+= str[itc_len(str)-(i+1)];
+    }
+    return S1;
+}
+
+string Straight(int k, int m){
+    string st = "";
+    char j;
+    int f;
+    if (k<0){
+    f=k;
+    k=k*-1;
+    }
+    while(k!=0){
+        j = k%2 + '0';
+        st+=j;
+        k=k/2;
+    }
+    if (k>=0){
+        while(itc_len(st)<m){
+            st+='0';
+        }
+    }
+    if(f<0){
+        while(itc_len(st)<m){
+            st+='0';
+        }
+        st[m-1]='1';
+    }
+    st = itc_reverse_str(st);
+    return st;
+}
+
+
+string Rever(int r, int y){
+string st = Straight(r, y);
+    if (r>=0){
+        for(int i = 0; i < itc_len(st); i++){
+            if(st[i]=='0'){
+                st[i]='1';
+            }
+            if(st[i]=='1'){
+                st[i]='0';
+            }
+        }
+    }
+    if (r<0){
+        for(int i = 0; i < itc_len(st); i++){
+            if(st[i]=='0'){
+                st[i]='1';
+            }
+            if(st[i]=='1'){
+                st[i]='0';
+            }
+        }
+        st[itc_len(st)-1]='1';
+    }
+    return st;
+}
+
+
+
+int main(){
+    int k, m;
+    cin >> k >> m;
+    cout << Straight(k, m);
+
+
+return 0;
+}
