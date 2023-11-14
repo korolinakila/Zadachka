@@ -50,36 +50,65 @@ string Straight(int k, int m){
 
 string Rever(int r, int y){
 string st = Straight(r, y);
+int m = 0;
     if (r>=0){
         for(int i = 0; i < itc_len(st); i++){
+                m=0;
             if(st[i]=='0'){
                 st[i]='1';
+                m=1;
             }
-            if(st[i]=='1'){
+            if(st[i]=='1' && m==0){
                 st[i]='0';
             }
         }
     }
     if (r<0){
-        for(int i = 0; i < itc_len(st); i++){
+        for(int i = 1; i < itc_len(st); i++){
+                m=0;
             if(st[i]=='0'){
                 st[i]='1';
+                m=1;
             }
-            if(st[i]=='1'){
+            if(st[i]=='1' && m==0){
                 st[i]='0';
             }
         }
-        st[itc_len(st)-1]='1';
     }
+    return st;
+}
+string Dop(int z, int x){
+string st = Rever(z, x);
+int m=1, r=0;
+if (z<0){
+        for(int i = 1; i < itc_len(st); i++){
+            if(st[itc_len(st)-i]=='1'){
+                r+=m;
+            }
+            m = m*2;
+            }
+        }
+    r+=1;
+    r = r*(-1);
+    st = Straight(r, x);
     return st;
 }
 
 
 
 int main(){
-    int k, m;
-    cin >> k >> m;
-    cout << Straight(k, m);
+    int k, m, p;
+    cin >> k >> m >> p;
+    if (p == 1){
+        cout << Straight(k, m);
+    }
+    if (p == 2){
+        cout << Rever(k, m);
+    }
+    if (p == 3){
+        cout << Dop(k, m);
+    }
+
 
 
 return 0;
